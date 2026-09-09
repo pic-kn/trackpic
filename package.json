@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out -b gh-pages",
+    "predeploy": "npm run build && touch out/.nojekyll",
+    "deploy": "gh-pages -d out -b gh-pages -t",
     "start": "next start",
     "test": "node --test"
   },
