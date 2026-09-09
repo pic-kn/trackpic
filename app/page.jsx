@@ -30,9 +30,6 @@ export default function MusicPlayerMaker() {
   const [selectedBgHex, setSelectedBgHex] = useState("#FFFFFF");
   const [isDropperActive, setIsDropperActive] = useState(false);
 
-  // モバイル・アプリ内ブラウザ用画像プレビューモーダル
-  const [previewModalUrl, setPreviewModalUrl] = useState(null);
-
   // モバイルパネル
   const [activeMobilePanel, setActiveMobilePanel] = useState("");
 
@@ -221,24 +218,13 @@ export default function MusicPlayerMaker() {
     triggerImageSelect();
   };
 
-  // PNG保存 (LINE/X等のアプリ内ブラウザおよびモバイル環境での長押し保存サポート)
+  // PNG保存
   const saveImage = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     try {
       const dataUrl = canvas.toDataURL("image/png");
-
-      const ua = typeof navigator !== "undefined" ? navigator.userAgent || "" : "";
-      const isInAppBrowser = /Line|FBAN|FBAV|Twitter|Instagram|MicroMessenger/i.test(ua);
-      const isTouchDevice = typeof window !== "undefined" && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-
-      if (isInAppBrowser || (isTouchDevice && window.innerWidth <= 900)) {
-        setPreviewModalUrl(dataUrl);
-        showToast("長押しで画像を保存してください");
-        return;
-      }
-
       const link = document.createElement("a");
       const filename = `trackpic_${title ? title.replace(/\s+/g, "_") : "card"}_${currentPreset.id}.png`;
       link.download = filename;
@@ -638,28 +624,6 @@ export default function MusicPlayerMaker() {
       {toastMessage && (
         <div className="toast-container">
           <div className="toast">{toastMessage}</div>
-        </div>
-      )}
-
-      {/* モバイル / アプリ内ブラウザ用 長押し保存モーダル */}
-      {previewModalUrl && (
-        <div
-          className="preview-modal-overlay"
-          onClick={() => setPreviewModalUrl(null)}
-        >
-          <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="preview-modal-header">
-              <span>画像を長押しして保存</span>
-              <button className="preview-modal-close" onClick={() => setPreviewModalUrl(null)}>✕</button>
-            </div>
-            <img src={previewModalUrl} alt="Generated TrackPic Wallpaper" className="preview-modal-img" />
-            <div className="preview-modal-actions">
-              <a href={previewModalUrl} download={`trackpic_${currentPreset.id}.png`} className="preview-modal-download-btn">
-                <Download size={16} />
-                <span>直接ダウンロードを試す</span>
-              </a>
-            </div>
-          </div>
         </div>
       )}
     </main>
