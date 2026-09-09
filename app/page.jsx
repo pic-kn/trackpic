@@ -282,7 +282,7 @@ export default function MusicPlayerMaker() {
       {/* 設定エリア (右・デスクトップ) */}
       <section className="control-panel" aria-label="設定エリア">
         <div className="brand-row">
-          <p className="eyebrow">MUSIC PLAYER MAKER</p>
+          <p className="eyebrow">TRACKPIC</p>
         </div>
 
         {/* 壁紙サイズ選択 */}

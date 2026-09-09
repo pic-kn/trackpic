@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/music-player-maker',
+  basePath: '/trackpic',
   images: {
     unoptimized: true,
   },
