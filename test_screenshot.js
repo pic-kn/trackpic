@@ -11,7 +11,7 @@ import puppeteer from 'puppeteer';
     page.on('pageerror', err => console.error('BROWSER PAGE ERROR:', err));
 
     await page.setViewport({ width: 1440, height: 960 });
-    await page.goto('http://localhost:3000', { waitUntil: 'networkidle2' });
+    await page.goto('http://localhost:3000/music-player-maker/', { waitUntil: 'networkidle2' });
     await new Promise(r => setTimeout(r, 2000));
     
     await page.screenshot({ path: 'preview_screenshot.png', fullPage: true });
