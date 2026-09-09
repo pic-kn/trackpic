@@ -244,24 +244,8 @@ export default function MusicPlayerMaker() {
           />
 
           {isDropperActive && (
-            <div style={{
-              position: "absolute",
-              top: 16,
-              left: "50%",
-              transform: "translateX(-50%)",
-              background: "rgba(0, 0, 0, 0.75)",
-              color: "#ffffff",
-              padding: "6px 16px",
-              borderRadius: 20,
-              fontSize: 12,
-              letterSpacing: "0.05em",
-              pointerEvents: "none",
-              zIndex: 10,
-              display: "flex",
-              alignItems: "center",
-              gap: 6
-            }}>
-              <Pipette size={14} />
+            <div className="dropper-active-badge">
+              <Pipette className="dropper-badge-icon" />
               <span>写真の上をタップして色を選択</span>
             </div>
           )}

@@ -509,6 +509,35 @@ canvas {
   100% { opacity: 0; transform: translateY(-10px); }
 }
 
+/* スポイト起動中バッジ */
+.dropper-active-badge {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 44, 51, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.dropper-badge-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /* モバイル表示 */
 @media (max-width: 900px) {
   body {
@@ -546,6 +575,19 @@ canvas {
     max-width: min(100%, 360px);
     max-height: calc(100svh - 210px);
     box-shadow: 0 16px 42px rgba(30, 44, 51, 0.12);
+  }
+
+  .dropper-active-badge {
+    top: 8px;
+    padding: 4px 10px;
+    font-size: 10.5px;
+    border-radius: 14px;
+    gap: 4px;
+  }
+
+  .dropper-badge-icon {
+    width: 11px;
+    height: 11px;
   }
 
   canvas {
