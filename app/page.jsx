@@ -218,19 +218,45 @@ export default function MusicPlayerMaker() {
     triggerImageSelect();
   };
 
-  // PNG保存
-  const saveImage = () => {
+  // 写真ライブラリ保存 & PNGエクスポート機能 (Web Share API による写真ライブラリ直接保存対応)
+  const saveImage = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     try {
-      const dataUrl = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      const filename = `trackpic_${title ? title.replace(/\s+/g, "_") : "card"}_${currentPreset.id}.png`;
-      link.download = filename;
-      link.href = dataUrl;
-      link.click();
-      showToast(`${currentPreset.name} のPNG画像を保存しました`);
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          showToast("画像の生成に失敗しました");
+          return;
+        }
+
+        const filename = `trackpic_${title ? title.replace(/\s+/g, "_") : "card"}_${currentPreset.id}.png`;
+        const file = new File([blob], filename, { type: "image/png" });
+
+        // スマホ環境 (iPhone / Android) で写真ライブラリへ「画像を保存」できるネイティブ共有シートを起動
+        if (typeof navigator !== "undefined" && navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: "TrackPic 壁紙画像",
+              text: "TrackPic で作成した壁紙画像"
+            });
+            showToast("「画像を保存」で写真アプリに保存できます");
+            return;
+          } catch (shareErr) {
+            if (shareErr.name === "AbortError") return; // ユーザーキャンセル時
+          }
+        }
+
+        // デスクトップブラウザまたは File Share 非対応環境のフォールバック
+        const objectUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = objectUrl;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
+        showToast(`${currentPreset.name} の画像を保存しました`);
+      }, "image/png");
     } catch (err) {
       console.error(err);
       showToast("画像の保存に失敗しました");
