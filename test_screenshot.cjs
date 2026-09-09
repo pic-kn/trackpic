@@ -8,8 +8,8 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 900 });
 
-  console.log("Navigating to http://localhost:3000 ...");
-  await page.goto('http://localhost:3000', { waitUntil: 'networkidle2' });
+  console.log("Navigating to http://localhost:3000/music-player-maker ...");
+  await page.goto('http://localhost:3000/music-player-maker', { waitUntil: 'networkidle2' });
 
   // Wait for canvas to draw
   await new Promise(r => setTimeout(r, 1000));
