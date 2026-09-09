@@ -30,6 +30,9 @@ export default function MusicPlayerMaker() {
   const [selectedBgHex, setSelectedBgHex] = useState("#FFFFFF");
   const [isDropperActive, setIsDropperActive] = useState(false);
 
+  // モバイル・アプリ内ブラウザ用画像プレビューモーダル
+  const [previewModalUrl, setPreviewModalUrl] = useState(null);
+
   // モバイルパネル
   const [activeMobilePanel, setActiveMobilePanel] = useState("");
 
@@ -94,9 +97,14 @@ export default function MusicPlayerMaker() {
 
   useEffect(() => {
     redrawCanvas();
+    if (typeof document !== "undefined" && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        redrawCanvas();
+      });
+    }
   }, [redrawCanvas]);
 
-  // 写真選択処理
+  // 写真選択処理 (超高解像度画像のメモリ溢れ防止・自動リサイズ 2560px)
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -108,7 +116,32 @@ export default function MusicPlayerMaker() {
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      setImageSrc(event.target.result);
+      const rawDataUrl = event.target.result;
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        const MAX_DIM = 2560;
+        let w = tempImg.naturalWidth || tempImg.width;
+        let h = tempImg.naturalHeight || tempImg.height;
+
+        if (w > MAX_DIM || h > MAX_DIM) {
+          const ratio = Math.min(MAX_DIM / w, MAX_DIM / h);
+          w = Math.round(w * ratio);
+          h = Math.round(h * ratio);
+
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(tempImg, 0, 0, w, h);
+          setImageSrc(canvas.toDataURL(file.type || "image/jpeg", 0.92));
+        } else {
+          setImageSrc(rawDataUrl);
+        }
+      };
+      tempImg.onerror = () => {
+        setImageSrc(rawDataUrl);
+      };
+      tempImg.src = rawDataUrl;
     };
     reader.readAsDataURL(file);
   };
@@ -188,15 +221,26 @@ export default function MusicPlayerMaker() {
     triggerImageSelect();
   };
 
-  // PNG保存
+  // PNG保存 (LINE/X等のアプリ内ブラウザおよびモバイル環境での長押し保存サポート)
   const saveImage = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     try {
       const dataUrl = canvas.toDataURL("image/png");
+
+      const ua = typeof navigator !== "undefined" ? navigator.userAgent || "" : "";
+      const isInAppBrowser = /Line|FBAN|FBAV|Twitter|Instagram|MicroMessenger/i.test(ua);
+      const isTouchDevice = typeof window !== "undefined" && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+      if (isInAppBrowser || (isTouchDevice && window.innerWidth <= 900)) {
+        setPreviewModalUrl(dataUrl);
+        showToast("長押しで画像を保存してください");
+        return;
+      }
+
       const link = document.createElement("a");
-      const filename = `music_player_${title ? title.replace(/\s+/g, "_") : "card"}_${currentPreset.id}.png`;
+      const filename = `trackpic_${title ? title.replace(/\s+/g, "_") : "card"}_${currentPreset.id}.png`;
       link.download = filename;
       link.href = dataUrl;
       link.click();
@@ -594,6 +638,28 @@ export default function MusicPlayerMaker() {
       {toastMessage && (
         <div className="toast-container">
           <div className="toast">{toastMessage}</div>
+        </div>
+      )}
+
+      {/* モバイル / アプリ内ブラウザ用 長押し保存モーダル */}
+      {previewModalUrl && (
+        <div
+          className="preview-modal-overlay"
+          onClick={() => setPreviewModalUrl(null)}
+        >
+          <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="preview-modal-header">
+              <span>画像を長押しして保存</span>
+              <button className="preview-modal-close" onClick={() => setPreviewModalUrl(null)}>✕</button>
+            </div>
+            <img src={previewModalUrl} alt="Generated TrackPic Wallpaper" className="preview-modal-img" />
+            <div className="preview-modal-actions">
+              <a href={previewModalUrl} download={`trackpic_${currentPreset.id}.png`} className="preview-modal-download-btn">
+                <Download size={16} />
+                <span>直接ダウンロードを試す</span>
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </main>
