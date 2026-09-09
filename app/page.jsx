@@ -210,7 +210,7 @@ export default function MusicPlayerMaker() {
   // サイト自体の X (Twitter) シェア機能
   const shareSiteOnX = () => {
     const siteUrl = typeof window !== "undefined" ? window.location.href : "";
-    const shareText = "お気に入りの写真と曲名で音楽プレイヤー風壁紙画像を作ろう！ #MusicPlayerMaker";
+    const shareText = "お気に入りの写真で作る音楽プレイヤー風壁紙メーカー TrackPic #TrackPic";
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(siteUrl)}`, "_blank");
   };
 
@@ -228,7 +228,7 @@ export default function MusicPlayerMaker() {
       {/* プレビューエリア (左) */}
       <section className="preview-panel" aria-label="プレビューエリア">
         <header className="preview-toolbar">
-          <span>Music Player Maker</span>
+          <span>TrackPic</span>
           <span>{currentPreset.name}</span>
         </header>
 

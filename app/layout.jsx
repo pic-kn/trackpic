@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Music Player Maker - 9:16 音楽プレイヤー風画像ジェネレーター",
-  description: "お気に入りの写真や曲名から美しい9:16音楽プレイヤー風画像を生成・エクスポートできるWebツール",
+  title: "TrackPic - 写真で作る 9:16 音楽プレイヤー風壁紙メーカー",
+  description: "お気に入りの写真から美しい9:16音楽プレイヤー風壁紙とカラーパレットを生成・保存できるWebツール",
 };
 
 export default function RootLayout({ children }) {
