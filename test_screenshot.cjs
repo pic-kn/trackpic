@@ -7,33 +7,19 @@ const puppeteer = require('puppeteer');
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+  await page.setViewport({ width: 1280, height: 900 });
 
   console.log("Navigating to http://localhost:3000/trackpic ...");
   await page.goto('http://localhost:3000/trackpic', { waitUntil: 'networkidle2' });
   await new Promise(r => setTimeout(r, 1000));
 
-  // Upload dummy image via input
-  const fileInput = await page.$('input[type="file"]');
-  if (fileInput) {
-    await fileInput.uploadFile('/Users/keijunishimura/.gemini/antigravity/brain/1c018478-ceda-4c02-a21d-8ddd627cf732/media__1788948571206.jpg');
-    await new Promise(r => setTimeout(r, 1000));
+  // Type a very long title into the title input field
+  const titleInput = await page.$('input[value="青色がすき。"]');
+  if (titleInput) {
+    await titleInput.click({ clickCount: 3 });
+    await titleInput.type('非常に長い楽曲タイトルのテストメッセージ（絶対にハートアイコンと被らないはずの長文テスト）');
+    await new Promise(r => setTimeout(r, 800));
   }
-
-  // Open color tab
-  await page.evaluate(() => {
-    const btns = Array.from(document.querySelectorAll('.mobile-tool'));
-    const colorBtn = btns.find(b => b.textContent.includes('カラー'));
-    if (colorBtn) colorBtn.click();
-  });
-  await new Promise(r => setTimeout(r, 500));
-
-  // Click dropper button
-  await page.evaluate(() => {
-    const btn = document.querySelector('.mobile-sheet button');
-    if (btn) btn.click();
-  });
-  await new Promise(r => setTimeout(r, 500));
 
   const artifactPath = '/Users/keijunishimura/.gemini/antigravity/brain/1c018478-ceda-4c02-a21d-8ddd627cf732/preview_screenshot.png';
   await page.screenshot({ path: artifactPath, fullPage: true });
