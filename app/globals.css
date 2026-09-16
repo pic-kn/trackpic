@@ -919,16 +919,13 @@ canvas {
   text-decoration: underline;
 }
 
-.static-page-body a:hover {
-  color: var(--mid);
-}
-
-/* Infoメニュー (固定ボタン ＆ ポップオーバー) */
+/* Infoメニュー (ドラッグ可能な半透明固定ボタン ＆ ポップオーバー) */
 .info-menu-wrapper {
   position: fixed;
   bottom: 24px;
-  right: 28px;
+  left: 24px;
   z-index: 50;
+  touch-action: none;
 }
 
 .info-menu-button {
@@ -936,31 +933,40 @@ canvas {
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(189, 203, 204, 0.6);
   border-radius: 20px;
-  background: rgba(252, 252, 252, 0.88);
+  background: rgba(252, 252, 252, 0.65);
   color: var(--ink-dim);
+  opacity: 0.82;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 16px rgba(30, 44, 51, 0.08);
-  cursor: pointer;
+  cursor: grab;
+  user-select: none;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.05em;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .info-menu-button:hover,
-.info-menu-button.active {
-  background: var(--ink);
-  color: var(--base);
-  border-color: var(--ink);
+.info-menu-button.active,
+.info-menu-button.dragging {
+  opacity: 1;
+  background: rgba(252, 252, 252, 0.94);
+  color: var(--ink);
+  border-color: var(--mid);
+  box-shadow: 0 6px 20px rgba(30, 44, 51, 0.14);
+}
+
+.info-menu-button.dragging {
+  cursor: grabbing;
 }
 
 .info-menu-popover {
   position: absolute;
   bottom: 44px;
-  right: 0;
+  left: 0;
   width: 220px;
   padding: 12px 14px;
   border: 1px solid var(--line);
@@ -1013,18 +1019,31 @@ canvas {
   color: var(--accent);
 }
 
-@media (max-width: 900px) {
-  .info-menu-wrapper {
-    bottom: auto;
-    top: 16px;
-    right: 16px;
-  }
-
-  .info-menu-popover {
-    bottom: auto;
-    top: 44px;
-    right: 0;
-  }
+.info-menu-footer-copyright {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--wash);
+  color: var(--ink-dim);
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
 }
+
+/* 固定ページフッター著作権表記 */
+.static-page-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.copyright-text {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
 
 

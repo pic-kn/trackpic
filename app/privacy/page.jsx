@@ -1,4 +1,5 @@
 import StaticHeader from "../../components/StaticHeader";
+import StaticFooter from "../../components/StaticFooter";
 
 export const metadata = {
   title: "プライバシーポリシー - TrackPic",
@@ -54,6 +55,7 @@ export default function PrivacyPage() {
           </p>
         </div>
       </main>
+      <StaticFooter />
     </div>
   );
 }

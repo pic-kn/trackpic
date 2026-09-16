@@ -1,4 +1,5 @@
 import StaticHeader from "../../components/StaticHeader";
+import StaticFooter from "../../components/StaticFooter";
 
 export const metadata = {
   title: "使い方ガイド - TrackPic",
@@ -42,6 +43,7 @@ export default function GuidePage() {
           </p>
         </div>
       </main>
+      <StaticFooter />
     </div>
   );
 }
