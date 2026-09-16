@@ -791,21 +791,7 @@ canvas {
   }
 }
 
-.mobile-footer {
-  display: none;
-}
-
-@media (max-width: 900px) {
-  .mobile-footer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 24px;
-    padding-bottom: 90px;
-  }
-}
-
-/* サイトフッター */
+/* サイトフッター（固定ページ内） */
 .site-footer {
   margin-top: auto;
   padding-top: 24px;
@@ -936,4 +922,109 @@ canvas {
 .static-page-body a:hover {
   color: var(--mid);
 }
+
+/* Infoメニュー (固定ボタン ＆ ポップオーバー) */
+.info-menu-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  z-index: 50;
+}
+
+.info-menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(252, 252, 252, 0.88);
+  color: var(--ink-dim);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(30, 44, 51, 0.08);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.info-menu-button:hover,
+.info-menu-button.active {
+  background: var(--ink);
+  color: var(--base);
+  border-color: var(--ink);
+}
+
+.info-menu-popover {
+  position: absolute;
+  bottom: 44px;
+  right: 0;
+  width: 220px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(252, 252, 252, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 36px rgba(30, 44, 51, 0.16);
+  animation: fadeInPop 0.18s ease-out;
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.info-menu-header {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--wash);
+  color: var(--light2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.info-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-menu-links a {
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: 12px;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.info-menu-links a:hover {
+  background: var(--wash);
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .info-menu-wrapper {
+    bottom: auto;
+    top: 16px;
+    right: 16px;
+  }
+
+  .info-menu-popover {
+    bottom: auto;
+    top: 44px;
+    right: 0;
+  }
+}
+
 

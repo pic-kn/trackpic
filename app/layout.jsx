@@ -1,4 +1,5 @@
 import Script from "next/script";
+import InfoMenu from "../components/InfoMenu";
 import "./globals.css";
 
 export const metadata = {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
           </>
         )}
         {children}
+        <InfoMenu />
       </body>
     </html>
   );
