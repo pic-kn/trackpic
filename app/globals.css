@@ -791,6 +791,20 @@ canvas {
   }
 }
 
+.mobile-footer {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 24px;
+    padding-bottom: 90px;
+  }
+}
+
 /* サイトフッター */
 .site-footer {
   margin-top: auto;

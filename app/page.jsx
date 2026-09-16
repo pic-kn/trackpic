@@ -326,6 +326,11 @@ export default function MusicPlayerMaker() {
             </button>
           </div>
         </div>
+
+        {/* モバイル用サイトフッター */}
+        <div className="mobile-footer">
+          <FooterNav />
+        </div>
       </section>
 
       {/* 設定エリア (右・デスクトップ) */}
