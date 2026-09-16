@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { renderMusicPlayerCanvas, WALLPAPER_PRESETS } from "../lib/canvasMath";
 import { extractPalette } from "../lib/colorExtractor";
 import * as gtag from "../lib/gtag";
+import FooterNav from "../components/FooterNav";
 
 // X (Twitter) アイコン
 function XIcon({ size = 16 }) {
@@ -512,6 +513,9 @@ export default function MusicPlayerMaker() {
             </button>
           </div>
         </div>
+
+        {/* サイトフッター */}
+        <FooterNav />
       </section>
 
       {/* モバイル表示時のボトムツールバー & ボトムシート */}
