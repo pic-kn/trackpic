@@ -6,7 +6,7 @@ export const metadata = {
   description: "お気に入りの写真から美しい9:16音楽プレイヤー風壁紙とカラーパレットを生成・保存できるWebツール",
 };
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-L473FCY7DX";
 
 export default function RootLayout({ children }) {
   return (

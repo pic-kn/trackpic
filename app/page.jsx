@@ -4,6 +4,7 @@ import { Copy, Download, Image as ImageIcon, Link as LinkIcon, Maximize2, Music,
 import { useCallback, useEffect, useRef, useState } from "react";
 import { renderMusicPlayerCanvas, WALLPAPER_PRESETS } from "../lib/canvasMath";
 import { extractPalette } from "../lib/colorExtractor";
+import * as gtag from "../lib/gtag";
 
 // X (Twitter) アイコン
 function XIcon({ size = 16 }) {
@@ -141,6 +142,9 @@ export default function MusicPlayerMaker() {
       tempImg.src = rawDataUrl;
     };
     reader.readAsDataURL(file);
+
+    // GA4 イベント送信: 画像アップロード
+    gtag.event({ action: "upload_image", category: "photo", label: file.name });
   };
 
   // 画像クリア
@@ -209,6 +213,7 @@ export default function MusicPlayerMaker() {
           setSelectedBgHex(extracted[0].hex);
         }
         showToast("選択位置から色を抽出しました");
+        gtag.event({ action: "eyedropper_pick", category: "color", label: extracted[0]?.hex || "" });
       } else {
         showToast("写真の上をタップして色を選択してください");
       }
@@ -242,6 +247,7 @@ export default function MusicPlayerMaker() {
               text: "TrackPic で作成した壁紙画像"
             });
             showToast("「画像を保存」で写真アプリに保存できます");
+            gtag.event({ action: "download_png", category: "conversion", label: currentPreset.id });
             return;
           } catch (shareErr) {
             if (shareErr.name === "AbortError") return; // ユーザーキャンセル時
@@ -256,6 +262,7 @@ export default function MusicPlayerMaker() {
         link.click();
         setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
         showToast(`${currentPreset.name} の画像を保存しました`);
+        gtag.event({ action: "download_png", category: "conversion", label: currentPreset.id });
       }, "image/png");
     } catch (err) {
       console.error(err);
@@ -268,6 +275,7 @@ export default function MusicPlayerMaker() {
     const siteUrl = typeof window !== "undefined" ? window.location.href : "";
     const shareText = "お気に入りの写真で作る音楽プレイヤー風壁紙メーカー TrackPic #TrackPic";
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(siteUrl)}`, "_blank");
+    gtag.event({ action: "share_x", category: "engagement", label: "twitter" });
   };
 
   return (
