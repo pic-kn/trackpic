@@ -1019,15 +1019,18 @@ canvas {
   color: var(--accent);
 }
 
-.info-menu-footer-copyright {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--wash);
-  color: var(--ink-dim);
+/* 当サイト固定著作権表記（© 著作権者名 発行年） */
+.site-copyright {
+  position: fixed;
+  bottom: 14px;
+  right: 28px;
+  z-index: 10;
+  pointer-events: none;
   font-size: 10px;
-  text-align: center;
+  color: var(--ink-dim);
+  opacity: 0.65;
   letter-spacing: 0.05em;
-  opacity: 0.8;
+  user-select: none;
 }
 
 /* 固定ページフッター著作権表記 */
@@ -1043,6 +1046,20 @@ canvas {
   font-size: 11px;
   letter-spacing: 0.05em;
   opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .info-menu-wrapper {
+    bottom: 78px;
+    left: 16px;
+  }
+
+  .site-copyright {
+    bottom: 78px;
+    right: 16px;
+    font-size: 9.5px;
+    opacity: 0.6;
+  }
 }
 
 

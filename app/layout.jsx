@@ -1,5 +1,6 @@
 import Script from "next/script";
 import InfoMenu from "../components/InfoMenu";
+import SiteCopyright from "../components/SiteCopyright";
 import "./globals.css";
 
 export const metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
         )}
         {children}
         <InfoMenu />
+        <SiteCopyright />
       </body>
     </html>
   );

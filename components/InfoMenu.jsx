@@ -121,10 +121,10 @@ export default function InfoMenu() {
     };
   }, [isOpen]);
 
-  // 初期配置：左下 (bottom: 24px, left: 24px)
+  // 初期配置（スタイルはCSSでメディアクエリ対応、ドラッグ後はposを使用）
   const wrapperStyle = pos
     ? { position: "fixed", left: `${pos.x}px`, top: `${pos.y}px`, bottom: "auto", right: "auto" }
-    : { position: "fixed", bottom: "24px", left: "24px", right: "auto", top: "auto" };
+    : undefined;
 
   // ポップオーバーの表示位置（画面上半分のときは下側、下半分のときは上側に表示）
   const isUpperHalf = pos ? pos.y < window.innerHeight / 2 : false;
@@ -172,10 +172,6 @@ export default function InfoMenu() {
               お問い合わせ
             </Link>
           </nav>
-          {/* © 著作権者名 発行年 */}
-          <div className="info-menu-footer-copyright">
-            © TrackPic 2026
-          </div>
         </div>
       )}
     </div>
