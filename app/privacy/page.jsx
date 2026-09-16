@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             当サービスでは、サービスの利用状況の把握および改善を目的として、Googleによるアクセス解析ツール「Google アナリティクス 4（GA4）」を利用しています。
           </p>
           <p>
-            Google アナリティクスはデータ収集のためにCookie（クッキー）を使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
+            Google アナリティクスはデータ収集のためにCookie（クッキー）を使用しています。Google Analyticsによって収集される情報は、当サービスがユーザー個人を直接特定する目的では利用していません。
           </p>
           <p>
             Cookieの収集は、お使いのブラウザの設定により無効化することが可能です。Googleによるデータの収集および処理の仕組みについては、<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer">Googleのサービスを使用するサイトやアプリから収集された情報のGoogleによる使用</a>をご確認ください。

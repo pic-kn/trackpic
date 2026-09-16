@@ -5,23 +5,23 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://trackpic.app/about</loc>
+    <loc>https://trackpic.app/about/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://trackpic.app/guide</loc>
+    <loc>https://trackpic.app/guide/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://trackpic.app/privacy</loc>
+    <loc>https://trackpic.app/privacy/</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://trackpic.app/terms</loc>
+    <loc>https://trackpic.app/terms/</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://trackpic.app/contact</loc>
+    <loc>https://trackpic.app/contact/</loc>
     <priority>0.5</priority>
   </url>
 </urlset>
