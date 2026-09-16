@@ -1,5 +1,4 @@
 import StaticHeader from "../../components/StaticHeader";
-import FooterNav from "../../components/FooterNav";
 
 export const metadata = {
   title: "利用規約 - TrackPic",
@@ -67,7 +66,6 @@ export default function TermsPage() {
           </p>
         </div>
       </main>
-      <FooterNav />
     </div>
   );
 }

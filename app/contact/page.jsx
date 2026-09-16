@@ -1,5 +1,4 @@
 import StaticHeader from "../../components/StaticHeader";
-import FooterNav from "../../components/FooterNav";
 
 export const metadata = {
   title: "お問い合わせ - TrackPic",
@@ -48,7 +47,6 @@ export default function ContactPage() {
           </ul>
         </div>
       </main>
-      <FooterNav />
     </div>
   );
 }

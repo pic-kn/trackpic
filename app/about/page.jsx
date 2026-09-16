@@ -1,5 +1,4 @@
 import StaticHeader from "../../components/StaticHeader";
-import FooterNav from "../../components/FooterNav";
 
 export const metadata = {
   title: "TrackPicについて - TrackPic",
@@ -42,7 +41,6 @@ export default function AboutPage() {
           </p>
         </div>
       </main>
-      <FooterNav />
     </div>
   );
 }
