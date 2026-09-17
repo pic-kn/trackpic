@@ -1157,6 +1157,106 @@ canvas {
 }
 
 @media (max-width: 900px) {
+  /* 固定ページ共通 モバイルタイポグラフィ・レイアウト調整 */
+  .static-page-wrapper {
+    padding: 24px 16px 60px;
+  }
+
+  .static-page-header {
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .static-page-brand {
+    font-size: 16px;
+  }
+
+  .static-page-back {
+    font-size: 11.5px;
+  }
+
+  .static-page-card {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .static-page-title {
+    font-size: 23px;
+    margin-bottom: 18px;
+  }
+
+  .static-page-body {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .static-page-body h2 {
+    font-size: 15.5px;
+    margin: 22px 0 10px;
+    padding-bottom: 4px;
+  }
+
+  .static-page-body h3 {
+    font-size: 13.5px;
+    margin: 16px 0 6px;
+  }
+
+  .static-page-body p {
+    margin-bottom: 12px;
+  }
+
+  .static-page-body ul,
+  .static-page-body ol {
+    margin-bottom: 14px;
+    padding-left: 20px;
+  }
+
+  .static-page-body li {
+    margin-bottom: 6px;
+  }
+
+  .static-page-body a {
+    font-size: 13px;
+  }
+
+  /* FAQ モバイル文字サイズ＆余白の微調整 */
+  .faq-accordion h2 {
+    font-size: 13.5px;
+    margin: 18px 0 8px;
+  }
+
+  .faq-question-button {
+    padding: 10px 12px;
+    font-size: 13.5px;
+    gap: 10px;
+    min-height: 44px;
+  }
+
+  .faq-question-text {
+    line-height: 1.5;
+  }
+
+  .faq-chevron {
+    width: 15px;
+    height: 15px;
+  }
+
+  .faq-answer-content {
+    padding: 10px 12px 12px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .faq-answer-content p {
+    margin-bottom: 8px;
+  }
+
+  .faq-answer-content ol,
+  .faq-answer-content ul {
+    margin-bottom: 8px;
+    padding-left: 18px;
+  }
+
   .info-menu-wrapper {
     bottom: calc(78px + env(safe-area-inset-bottom));
     left: 16px;
