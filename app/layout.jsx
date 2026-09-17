@@ -22,6 +22,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        {/* Google AdSense Connection Script */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127203413622824"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Google Analytics (GA4) */}
         {GA_MEASUREMENT_ID && (
           <>
