@@ -14,6 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <head>
+        {/* Google AdSense Connection Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127203413622824"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -22,13 +28,6 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        {/* Google AdSense Connection Script */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127203413622824"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
 
         {/* Google Analytics (GA4) */}
         {GA_MEASUREMENT_ID && (
