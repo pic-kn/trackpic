@@ -87,6 +87,9 @@ export default function InfoMenu() {
             <Link href="/guide/" onClick={() => setIsOpen(false)}>
               使い方ガイド
             </Link>
+            <Link href="/faq/" onClick={() => setIsOpen(false)}>
+              よくある質問
+            </Link>
             <Link href="/privacy/" onClick={() => setIsOpen(false)}>
               プライバシーポリシー
             </Link>
