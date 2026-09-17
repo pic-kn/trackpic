@@ -13,6 +13,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://trackpic.app/faq/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://trackpic.app/privacy/</loc>
     <priority>0.5</priority>
   </url>
