@@ -223,6 +223,33 @@ export default function MusicPlayerMaker() {
     triggerImageSelect();
   };
 
+  // セッション内保存回数の計算と GA4 download_png イベント送信
+  const trackPngDownloadEvent = (preset) => {
+    let saveNumber = 1;
+    if (typeof window !== "undefined") {
+      try {
+        const currentCount = parseInt(sessionStorage.getItem("trackpic_save_count_session") || "0", 10);
+        saveNumber = currentCount + 1;
+        sessionStorage.setItem("trackpic_save_count_session", saveNumber.toString());
+      } catch (e) {
+        saveNumber = 1;
+      }
+    }
+
+    const wallpaperSizeMap = {
+      standard: "standard_9_16"
+    };
+    const wallpaperSize = wallpaperSizeMap[preset.id] || preset.id;
+
+    gtag.event({
+      action: "download_png",
+      category: "conversion",
+      label: preset.id,
+      save_number_in_session: saveNumber,
+      wallpaper_size: wallpaperSize
+    });
+  };
+
   // 写真ライブラリ保存 & PNGエクスポート機能 (Web Share API による写真ライブラリ直接保存対応)
   const saveImage = async () => {
     const canvas = canvasRef.current;
@@ -247,7 +274,7 @@ export default function MusicPlayerMaker() {
               text: "TrackPic で作成した壁紙画像"
             });
             showToast("「画像を保存」で写真アプリに保存できます");
-            gtag.event({ action: "download_png", category: "conversion", label: currentPreset.id });
+            trackPngDownloadEvent(currentPreset);
             return;
           } catch (shareErr) {
             if (shareErr.name === "AbortError") return; // ユーザーキャンセル時
@@ -262,7 +289,7 @@ export default function MusicPlayerMaker() {
         link.click();
         setTimeout(() => URL.revokeObjectURL(objectUrl), 5000);
         showToast(`${currentPreset.name} の画像を保存しました`);
-        gtag.event({ action: "download_png", category: "conversion", label: currentPreset.id });
+        trackPngDownloadEvent(currentPreset);
       }, "image/png");
     } catch (err) {
       console.error(err);
